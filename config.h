@@ -1,5 +1,4 @@
-/* See LICENSE file for copyright and license details. */
-/* appearance */
+//      APARENCIA
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int gappx     = 4;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -23,19 +22,18 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_gruv,  col_border},
 };
 
+//      AUTOSTART
 static const char *const autostart[] = {
         "dwmblocks",NULL,
         NULL 
 };
 
-/* tagging */
+//      TAGS/WORKSPACES
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
+//     WINDOW RULES
+
 static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
 	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
 	{ "Xfce4-taskmanager",    NULL,     NULL,         0,         1,          0,           0,        -1 },
 	{ "St",      NULL,     NULL,           0,         0,          1,          0,        -1 },
@@ -43,11 +41,12 @@ static const Rule rules[] = {
 	{ "Termite",      NULL,     NULL,           0,         0,          1,          0,        -1 },
 	{ "Xfce4-terminal",      NULL,     NULL,           0,         0,          1,          0,        -1 },
         { NULL,      NULL,     "Event Tester", 0,         1,          0,           1,        -1 }, /* xev */
-        { NULL,		  "spterm",		NULL,		SPTAG(0),		1,			 -1 },
+        { NULL,		  "spterm",		NULL,		SPTAG(0),		1,			 -1},
 	{ NULL,		  "spfm",		NULL,		SPTAG(1),		1,			 -1 },
 
 };
 
+//      SCRATCHPADS
 
 typedef struct {
 	const char *name;
@@ -62,8 +61,8 @@ static Sp scratchpads[] = {
 };
 
 
+//      LAYOUTS
 
-/* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
@@ -76,7 +75,8 @@ static const Layout layouts[] = {
 	{ NULL,       NULL },
 };
 
-/* key definitions */
+//      KEYDEF
+
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
@@ -84,18 +84,19 @@ static const Layout layouts[] = {
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
-/* helper for spawning shell commands in the pre dwm-5.0 fashion */
+//      SPAWN SHELL CMDS
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-/* commands */
+//      VARIABLES
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-nb", "#282828" ,"-nf" ,"#f5f5f5" ,"-sb" ,"#689d6a" ,"-sf" ,"#f5f5f5","-h","20","-p","Run:", NULL };
 static const char *termcmd[]  = { "st","-T","TERMINAL",NULL };
 
+//      KEYBINDS
+
 static Key keys[] = {
 	//spawn apps
         { MODKEY,                       XK_c,      spawn,        SHCMD("st -e ncmpcpp") },
-	{ MODKEY,                       XK_a,      spawn,        SHCMD("st -e vifm") },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,        SHCMD("st -e newsboat") },
 	{ MODKEY,                       XK_w,      spawn,        SHCMD("xdg-open http://") },
 	{ MODKEY,                       XK_v,      spawn,        SHCMD("pavucontrol")},
@@ -111,10 +112,9 @@ static Key keys[] = {
 	{ ControlMask|Mod1Mask,         XK_t,      spawn,       SHCMD("bash ~/.config/dmenu-scr/config.sh") },
 	{ 0,                       XK_Print,      spawn,        SHCMD("bash ~/.config/dmenu-scr/screenshot.sh") },
        	{ MODKEY,			XK_s,	togglescratch,	{.ui = 0} },
-	{ MODKEY | ShiftMask,			XK_s,	togglescratch,	{.ui = 1} },
+	{ MODKEY ,			XK_a,	togglescratch,	{.ui = 1} },
 
-        /* modifier                     key        function        argument */
-	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+        { MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -156,8 +156,8 @@ static Key keys[] = {
 	{ MODKEY|Mod1Mask,              XK_r,      quit,           {1} }, 
 };
 
-/* button definitions */
-/* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
+//      MOUSEBINDS
+
 static Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
