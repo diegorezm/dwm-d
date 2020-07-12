@@ -10,4 +10,6 @@ My fork of suckless [dwm](https://dwm.suckless.org/).
 - restartsig
 - scratchpads
 - swallow
-
+- centeredwindowname
+- killunsel
+- rotatestack

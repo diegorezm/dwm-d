@@ -1,4 +1,5 @@
 //      APARENCIA
+
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int gappx     = 4;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -29,24 +30,24 @@ static const char *const autostart[] = {
 };
 
 //      TAGS/WORKSPACES
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1", "2", "3", "4", "5","6","7","8","9"};
 
 //     WINDOW RULES
 
 static const Rule rules[] = {
-	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "Xfce4-taskmanager",    NULL,     NULL,         0,         1,          0,           0,        -1 },
-	{ "St",      NULL,     NULL,           0,         0,          1,          0,        -1 },
-	{ "URxvt",      NULL,     NULL,           0,         0,          1,          0,        -1 },
-	{ "Termite",      NULL,     NULL,           0,         0,          1,          0,        -1 },
-	{ "Xfce4-terminal",      NULL,     NULL,           0,         0,          1,          0,        -1 },
+        /* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
+        { "Xfce4-taskmanager",    NULL,     NULL,         0,         1,          0,           0,        -1 },
+        { "St",      NULL,     NULL,           0,         0,          1,          0,        -1 },
+        { "URxvt",      NULL,     NULL,           0,         0,          1,          0,        -1 },
+        { "Termite",      NULL,     NULL,           0,         0,          1,          0,        -1 },
+        { "Xfce4-terminal",      NULL,     NULL,           0,         0,          1,          0,        -1 },
         { NULL,      NULL,     "Event Tester", 0,         1,          0,           1,        -1 }, /* xev */
         { NULL,		  "spterm",		NULL,		SPTAG(0),		1,			 -1},
-	{ NULL,		  "spfm",		NULL,		SPTAG(1),		1,			 -1 },
+        { NULL,		  "spfm",		NULL,		SPTAG(1),		1,			 -1 },
 
 };
 
-//      SCRATCHPADS
+      /* SCRATCHPADS */
 
 typedef struct {
 	const char *name;
@@ -61,8 +62,7 @@ static Sp scratchpads[] = {
 };
 
 
-//      LAYOUTS
-
+      /* LAYOUTS */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
@@ -75,7 +75,7 @@ static const Layout layouts[] = {
 	{ NULL,       NULL },
 };
 
-//      KEYDEF
+      /* KEYDEF */
 
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
@@ -84,18 +84,18 @@ static const Layout layouts[] = {
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
-//      SPAWN SHELL CMDS
+      /* SPAWN SHELL CMDS */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-//      VARIABLES
+      /* VARIABLES */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-nb", "#282828" ,"-nf" ,"#f5f5f5" ,"-sb" ,"#689d6a" ,"-sf" ,"#f5f5f5","-h","20","-p","Run:", NULL };
 static const char *termcmd[]  = { "st","-T","TERMINAL",NULL };
 
-//      KEYBINDS
+      /* KEYBINDS */
 
 static Key keys[] = {
-	//spawn apps
+	/* spawn apps */
         { MODKEY,                       XK_c,      spawn,        SHCMD("st -e ncmpcpp") },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,        SHCMD("st -e newsboat") },
 	{ MODKEY,                       XK_w,      spawn,        SHCMD("xdg-open http://") },
@@ -117,6 +117,8 @@ static Key keys[] = {
         { MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_k,      rotatestack,    {.i = -1 } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -126,6 +128,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
+	{ MODKEY|ShiftMask,             XK_q,      killunsel,      {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -156,7 +159,7 @@ static Key keys[] = {
 	{ MODKEY|Mod1Mask,              XK_r,      quit,           {1} }, 
 };
 
-//      MOUSEBINDS
+      /* MOUSEBINDS */
 
 static Button buttons[] = {
 	/* click                event mask      button          function        argument */
