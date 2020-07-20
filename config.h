@@ -10,13 +10,13 @@ static const char *fonts[]            = {"Mononoki Nerd Font:size=10:antialias=t
                                          "FontAwesome:size=10:antialias=true:autohint=true",
                                          "JoyPixels:size=10:antialias=true:autohint=true"};
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#282828";
+static const char col_gray1[]       = "#282a36";
 static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_border[]       = "#8ec07c";
+static const char col_gray3[]       = "#f8f8f2";
+static const char col_border[]       = "#50fa7b";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
-static const char col_gruv[]        = "#689d6a";
+static const char col_gruv[]        = "#6272a4";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -89,7 +89,7 @@ static const Layout layouts[] = {
 
       /* VARIABLES */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-nb", "#282828" ,"-nf" ,"#f5f5f5" ,"-sb" ,"#689d6a" ,"-sf" ,"#f5f5f5","-h","20","-p","Run:", NULL };
+static const char *dmenucmd[] = { "dmenu_run","-h","20","-p","Run:", NULL };
 static const char *termcmd[]  = { "st","-T","TERMINAL",NULL };
 
       /* KEYBINDS */
