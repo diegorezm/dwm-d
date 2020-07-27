@@ -10,13 +10,13 @@ static const char *fonts[]            = {"Mononoki Nerd Font:size=10:antialias=t
                                          "FontAwesome:size=10:antialias=true:autohint=true",
                                          "JoyPixels:size=10:antialias=true:autohint=true"};
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#282a36";
+static const char col_gray1[]       = "#282828";
 static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#f8f8f2";
+static const char col_gray3[]       = "#ebdbb2";
 static const char col_border[]       = "#50fa7b";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
-static const char col_gruv[]        = "#6272a4";
+static const char col_gruv[]        = "#d65d0e";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -53,8 +53,8 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
-const char *spcmd2[] = {"st", "-n", "spfm", "-g", "120x34", "-e", "vifm", NULL };
+const char *spcmd1[] = {"st", "-n", "spterm", "-g", "140x40", NULL };
+const char *spcmd2[] = {"st", "-n", "spfm", "-g", "140x40", "-e", "vifm", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -90,14 +90,14 @@ static const Layout layouts[] = {
       /* VARIABLES */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run","-h","20","-p","Run:", NULL };
-static const char *termcmd[]  = { "st","-T","TERMINAL",NULL };
+static const char *termcmd[]  = { "termite","-t","TERMINAL",NULL };
 
       /* KEYBINDS */
 
 static Key keys[] = {
 	/* spawn apps */
-        { MODKEY,                       XK_c,      spawn,        SHCMD("st -e ncmpcpp") },
-	{ MODKEY|ShiftMask,             XK_b,      spawn,        SHCMD("st -e newsboat") },
+        { MODKEY,                       XK_c,      spawn,        SHCMD("termite -e ncmpcpp") },
+	{ MODKEY|ShiftMask,             XK_b,      spawn,        SHCMD("termite -e newsboat") },
 	{ MODKEY,                       XK_w,      spawn,        SHCMD("xdg-open http://") },
 	{ MODKEY,                       XK_v,      spawn,        SHCMD("pavucontrol")},
 	
