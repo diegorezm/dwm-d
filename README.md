@@ -13,3 +13,10 @@ My fork of suckless [dwm](https://dwm.suckless.org/).
 - centeredwindowname
 - killunsel
 - rotatestack
+
+##      Installation guide
+```
+git clone https://github.com/diegorezm/dwm-d.git
+cd dwm-d
+sudo make install
+```
