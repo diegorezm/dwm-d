@@ -6,7 +6,9 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]            = {"Mononoki Nerd Font:size=10:antialias=true:autohint=true",
+static const char *fonts[]            = {"JetBrainsMono NL:size=10:antialias=true:autohint=true",
+                                         "DejavuSansMono:size=10:antialias=true:autohint=true",
+                                         "FontAwesome5Free:size=10:antialias=true:autohint=true",
                                          "FontAwesome:size=10:antialias=true:autohint=true",
                                          "JoyPixels:size=10:antialias=true:autohint=true"};
 static const char dmenufont[]       = "monospace:size=10";
@@ -65,7 +67,7 @@ static Sp scratchpads[] = {
       /* LAYOUTS */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -110,6 +112,7 @@ static Key keys[] = {
 	{ 0,                       XK_F9,     spawn,        SHCMD("xbacklight -inc 10") },
 	{ 0,                       XK_F1,     spawn,        SHCMD("bash ~/.config/dmenu-scr/power.sh") },
 	{ ControlMask|Mod1Mask,         XK_t,      spawn,       SHCMD("bash ~/.config/dmenu-scr/config.sh") },
+	{ MODKEY,         XK_l,      spawn,       SHCMD("bash ~/.local/bin/screenlock") },
 	{ 0,                       XK_Print,      spawn,        SHCMD("bash ~/.config/dmenu-scr/screenshot.sh") },
        	{ MODKEY,			XK_s,	togglescratch,	{.ui = 0} },
 	{ MODKEY ,			XK_a,	togglescratch,	{.ui = 1} },
