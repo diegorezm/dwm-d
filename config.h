@@ -33,9 +33,7 @@ static const char *const autostart[] = {
 
 //      TAGS/WORKSPACES
 static const char *tags[] = { "1", "2", "3", "4", "5","6","7","8","9"};
-
 //     WINDOW RULES
-
 static const Rule rules[] = {
         /* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
         { "Xfce4-taskmanager",    NULL,     NULL,         0,         1,          0,           0,        -1 },
@@ -45,7 +43,6 @@ static const Rule rules[] = {
         { "Xfce4-terminal",      NULL,     NULL,           0,         0,          1,          0,        -1 },
         { NULL,      NULL,     "Event Tester", 0,         1,          0,           1,        -1 }, /* xev */
         { NULL,		  "spterm",		NULL,		SPTAG(0),		1,			 -1},
-        { NULL,		  "spfm",		NULL,		SPTAG(1),		1,			 -1 },
 
 };
 
@@ -55,12 +52,10 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {"st", "-n", "spterm", "-g", "140x40", NULL };
-const char *spcmd2[] = {"st", "-n", "spfm", "-g", "140x40", "-e", "vifm", NULL };
+const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
-	{"spranger",    spcmd2},
 };
 
 
@@ -92,14 +87,15 @@ static const Layout layouts[] = {
       /* VARIABLES */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run","-h","20","-p","Run:", NULL };
-static const char *termcmd[]  = { "termite","-t","TERMINAL",NULL };
+static const char *termcmd[]  = { "st","-T","TERMINAL",NULL };
 
       /* KEYBINDS */
 
 static Key keys[] = {
 	/* spawn apps */
-        { MODKEY,                       XK_c,      spawn,        SHCMD("termite -e ncmpcpp") },
-	{ MODKEY|ShiftMask,             XK_b,      spawn,        SHCMD("termite -e newsboat") },
+        { MODKEY,                       XK_c,      spawn,        SHCMD("st -e ncmpcpp") },
+	{ MODKEY|ShiftMask,             XK_b,      spawn,        SHCMD("st -e newsboat") },
+	{ MODKEY,                       XK_a,      spawn,        SHCMD("st -e vifm") },
 	{ MODKEY,                       XK_w,      spawn,        SHCMD("xdg-open http://") },
 	{ MODKEY,                       XK_v,      spawn,        SHCMD("pavucontrol")},
 	
@@ -108,14 +104,15 @@ static Key keys[] = {
         
         { 0,                       XK_F11,    spawn,        SHCMD("amixer set Master 5%- && bash bar_refresh") },
 	{ 0,                       XK_F12,    spawn,        SHCMD("amixer set Master 5%+ && bash bar_refresh") },
-	{ 0,                       XK_F8,     spawn,        SHCMD("xbacklight -dec 10") },
-	{ 0,                       XK_F9,     spawn,        SHCMD("xbacklight -inc 10") },
-	{ 0,                       XK_F1,     spawn,        SHCMD("bash ~/.config/dmenu-scr/power.sh") },
+	{ MODKEY,                       XK_F8,     spawn,        SHCMD("xbacklight -dec 10") },
+	{ MODKEY,                       XK_F9,     spawn,        SHCMD("xbacklight -inc 10") },
+	{ MODKEY,                       XK_F1,     spawn,        SHCMD("bash ~/.config/dmenu-scr/power.sh") },
+	{ MODKEY,                       XK_F2,     spawn,        SHCMD("bash ~/.config/dmenu-scr/mount.sh") },
+	{ MODKEY,                       XK_F3,     spawn,        SHCMD("bash ~/.local/bin/dmenupd") },
 	{ ControlMask|Mod1Mask,         XK_t,      spawn,       SHCMD("bash ~/.config/dmenu-scr/config.sh") },
-	{ MODKEY,         XK_l,      spawn,       SHCMD("bash ~/.local/bin/screenlock") },
+	{ MODKEY | ShiftMask,         XK_l,      spawn,       SHCMD("bash ~/.local/bin/screenlock") },
 	{ 0,                       XK_Print,      spawn,        SHCMD("bash ~/.config/dmenu-scr/screenshot.sh") },
        	{ MODKEY,			XK_s,	togglescratch,	{.ui = 0} },
-	{ MODKEY ,			XK_a,	togglescratch,	{.ui = 1} },
 
         { MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
@@ -158,8 +155,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|Mod1Mask,              XK_q,      quit,           {0} },
-	{ MODKEY|Mod1Mask,              XK_r,      quit,           {1} }, 
+	{ MODKEY|ShiftMask,              XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,              XK_r,      quit,           {1} }, 
 };
 
       /* MOUSEBINDS */
