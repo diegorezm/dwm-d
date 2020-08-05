@@ -6,9 +6,8 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]            = {"JetBrainsMono NL:size=10:antialias=true:autohint=true",
+static const char *fonts[]            = {"mono:size=10:antialias=true:autohint=true",
                                          "DejavuSansMono:size=10:antialias=true:autohint=true",
-                                         "FontAwesome5Free:size=10:antialias=true:autohint=true",
                                          "FontAwesome:size=10:antialias=true:autohint=true",
                                          "JoyPixels:size=10:antialias=true:autohint=true"};
 static const char dmenufont[]       = "monospace:size=10";
@@ -92,18 +91,25 @@ static const char *termcmd[]  = { "st","-T","TERMINAL",NULL };
       /* KEYBINDS */
 
 static Key keys[] = {
+       /* mpd */ 
+        /* { MODKEY,                       XK_c,      spawn,        SHCMD("st -e ncmpcpp") }, */
+        /* { MODKEY,                       XK_p,      spawn,        SHCMD("mpc toggle")}, */
+        /* { MODKEY,                       XK_n,      spawn,        SHCMD("mpc next")}, */
+
+        /* deadbeef */
+        { MODKEY,                       XK_c,      spawn,        SHCMD("deadbeef") },
+        { MODKEY,                       XK_p,      spawn,        SHCMD("deadbeef --toggle-pause ; pkill -RTMIN+9 dwmblocks")},
+        { MODKEY,                       XK_n,      spawn,        SHCMD("deadbeef --next ; pkill -RTMIN+9 dwmblocks")},
+
 	/* spawn apps */
-        { MODKEY,                       XK_c,      spawn,        SHCMD("st -e ncmpcpp") },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,        SHCMD("st -e newsboat") },
 	{ MODKEY,                       XK_a,      spawn,        SHCMD("st -e vifm") },
 	{ MODKEY,                       XK_w,      spawn,        SHCMD("xdg-open http://") },
 	{ MODKEY,                       XK_v,      spawn,        SHCMD("pavucontrol")},
 	
-        { MODKEY,                       XK_p,      spawn,        SHCMD("mpc toggle")},
-        { MODKEY,                       XK_n,      spawn,        SHCMD("mpc next")},
         
-        { 0,                       XK_F11,    spawn,        SHCMD("amixer set Master 5%- && bash bar_refresh") },
-	{ 0,                       XK_F12,    spawn,        SHCMD("amixer set Master 5%+ && bash bar_refresh") },
+        { 0,                       XK_F11,    spawn,        SHCMD("amixer set Master 5%- && bash ~/.local/bin/bar_refresh") },
+	{ 0,                       XK_F12,    spawn,        SHCMD("amixer set Master 5%+ && bash ~/.local/bin/bar_refresh") },
 	{ MODKEY,                       XK_F8,     spawn,        SHCMD("xbacklight -dec 10") },
 	{ MODKEY,                       XK_F9,     spawn,        SHCMD("xbacklight -inc 10") },
 	{ MODKEY,                       XK_F1,     spawn,        SHCMD("bash ~/.config/dmenu-scr/power.sh") },
