@@ -1,5 +1,9 @@
 #      DWM
+
+!(dwm)[dwm.png]
+
 My fork of suckless [dwm](https://dwm.suckless.org/).
+
 
 ##      Patches
 - actualfullscreen
