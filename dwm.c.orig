@@ -176,7 +176,7 @@ static void drawbar(Monitor *m);
 static void drawbars(void);
 static void enqueue(Client *c);
 static void enqueuestack(Client *c);
-static void enternotify(XEvent *e);
+/* static void enternotify(XEvent *e); */
 static void expose(XEvent *e);
 static void focus(Client *c);
 static void focusin(XEvent *e);
@@ -191,6 +191,7 @@ static void grabkeys(void);
 static void incnmaster(const Arg *arg);
 static void keypress(XEvent *e);
 static void killclient(const Arg *arg);
+static void killunsel(const Arg *arg);
 static void manage(Window w, XWindowAttributes *wa);
 static void mappingnotify(XEvent *e);
 static void maprequest(XEvent *e);
@@ -870,7 +871,7 @@ drawbar(Monitor *m)
 	w = blw = TEXTW(m->ltsymbol);
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
-
+/* remove the comment to get the window title bar */
 	if ((w = m->ww - tw - x) > bh) {
 		if (m->sel) {
 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
@@ -1176,6 +1177,29 @@ killclient(const Arg *arg)
 		XSync(dpy, False);
 		XSetErrorHandler(xerror);
 		XUngrabServer(dpy);
+	}
+}
+
+void
+killunsel(const Arg *arg)
+{
+	Client *i = NULL;
+
+	if (!selmon->sel)
+		return;
+
+	for (i = selmon->clients; i; i = i->next) {
+		if (ISVISIBLE(i) && i != selmon->sel) {
+			if (!sendevent(i, wmatom[WMDelete])) {
+				XGrabServer(dpy);
+				XSetErrorHandler(xerrordummy);
+				XSetCloseDownMode(dpy, DestroyAll);
+				XKillClient(dpy, i->win);
+				XSync(dpy, False);
+				XSetErrorHandler(xerror);
+				XUngrabServer(dpy);
+			}
+		}
 	}
 }
 

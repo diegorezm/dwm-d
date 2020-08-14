@@ -13,6 +13,7 @@ My fork of suckless [dwm](https://dwm.suckless.org/).
 - centeredwindowname
 - killunsel
 - rotatestack
+- xresources
 
 ##      Installation guide
 ```

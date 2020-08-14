@@ -1,27 +1,28 @@
 //      APARENCIA
 
-static const unsigned int borderpx  = 3;        /* border pixel of windows */
-static const unsigned int gappx     = 3;        /* gaps between windows */
+
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int gappx     = 0;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]            = {"mono:size=10:antialias=true:autohint=true",
+static const char *fonts[]            = {"JetBrainsMono NL:size=10:antialias=true:autohint=true",
                                          "DejavuSansMono:size=10:antialias=true:autohint=true",
                                          "FontAwesome:size=10:antialias=true:autohint=true",
                                          "JoyPixels:size=10:antialias=true:autohint=true"};
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#282828";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#ebdbb2";
-static const char col_border[]       = "#50fa7b";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
-static const char col_gruv[]        = "#d65d0e";
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_gruv,  col_border},
+
+static char normbgcolor[]           = "#222222";
+static char normbordercolor[]       = "#444444";
+static char normfgcolor[]           = "#bbbbbb";
+static char selfgcolor[]            = "#eeeeee";
+static char selbordercolor[]        = "#005577";
+static char selbgcolor[]            = "#005577";
+static char *colors[][3] = {
+       /*               fg           bg           border   */
+       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 };
 
 //      AUTOSTART
@@ -51,7 +52,7 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
+const char *spcmd1[] = {"st", "-n", "spterm", "-g", "140x40", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -92,36 +93,37 @@ static const char *termcmd[]  = { "st","-T","TERMINAL",NULL };
 
 static Key keys[] = {
        /* mpd */ 
-        /* { MODKEY,                       XK_c,      spawn,        SHCMD("st -e ncmpcpp") }, */
-        /* { MODKEY,                       XK_p,      spawn,        SHCMD("mpc toggle")}, */
-        /* { MODKEY,                       XK_n,      spawn,        SHCMD("mpc next")}, */
+        { MODKEY,                       XK_c,      spawn,        SHCMD("st -e ncmpcpp") },
+        { MODKEY,                       XK_p,      spawn,        SHCMD("mpc toggle ; pkill -RTMIN+9 dwmblocks")},
+        { MODKEY,                       XK_n,      spawn,        SHCMD("mpc next ; pkill -RTMIN+9 dwmblocks")},
 
         /* deadbeef */
-        { MODKEY,                       XK_c,      spawn,        SHCMD("deadbeef") },
-        { MODKEY,                       XK_p,      spawn,        SHCMD("deadbeef --toggle-pause ; pkill -RTMIN+9 dwmblocks")},
-        { MODKEY,                       XK_n,      spawn,        SHCMD("deadbeef --next ; pkill -RTMIN+9 dwmblocks")},
+        /* { MODKEY,                       XK_c,      spawn,        SHCMD("deadbeef") }, */
+        /* { MODKEY,                       XK_p,      spawn,        SHCMD("deadbeef --toggle-pause ; pkill -RTMIN+9 dwmblocks")}, */
+        /* { MODKEY,                       XK_n,      spawn,        SHCMD("deadbeef --next ; pkill -RTMIN+9 dwmblocks")}, */
 
 	/* spawn apps */
 	{ MODKEY|ShiftMask,             XK_b,      spawn,        SHCMD("st -e newsboat") },
 	{ MODKEY,                       XK_a,      spawn,        SHCMD("st -e vifm") },
 	{ MODKEY,                       XK_w,      spawn,        SHCMD("xdg-open http://") },
-	{ MODKEY,                       XK_v,      spawn,        SHCMD("pavucontrol")},
-	
-        
-        { 0,                       XK_F11,    spawn,        SHCMD("amixer set Master 5%- && bash ~/.local/bin/bar_refresh") },
-	{ 0,                       XK_F12,    spawn,        SHCMD("amixer set Master 5%+ && bash ~/.local/bin/bar_refresh") },
+	/* { MODKEY,                       XK_v,      spawn,        SHCMD("pavucontrol")}, */
+	{ MODKEY,                       XK_v,      spawn,        SHCMD("st -e pulsemixer")},
+
+        { 0,                            XK_F11,    spawn,        SHCMD("amixer set Master 5%- && pkill -RTMIN+10 dwmblocks") },
+	{ 0,                            XK_F12,    spawn,        SHCMD("amixer set Master 5%+ && pkill -RTMIN+10 dwmblocks") },
 	{ MODKEY,                       XK_F8,     spawn,        SHCMD("xbacklight -dec 10") },
 	{ MODKEY,                       XK_F9,     spawn,        SHCMD("xbacklight -inc 10") },
 	{ MODKEY,                       XK_F1,     spawn,        SHCMD("bash ~/.config/dmenu-scr/power.sh") },
 	{ MODKEY,                       XK_F2,     spawn,        SHCMD("bash ~/.config/dmenu-scr/mount.sh") },
 	{ MODKEY,                       XK_F3,     spawn,        SHCMD("bash ~/.local/bin/dmenupd") },
-	{ ControlMask|Mod1Mask,         XK_t,      spawn,       SHCMD("bash ~/.config/dmenu-scr/config.sh") },
-	{ MODKEY | ShiftMask,         XK_l,      spawn,       SHCMD("bash ~/.local/bin/screenlock") },
-	{ 0,                       XK_Print,      spawn,        SHCMD("bash ~/.config/dmenu-scr/screenshot.sh") },
+	{ ControlMask|Mod1Mask,         XK_t,      spawn,        SHCMD("bash ~/.config/dmenu-scr/config.sh") },
+	{ MODKEY | ShiftMask,           XK_l,      spawn,        SHCMD("bash ~/.local/bin/screenlock") },
+	{ 0,                            XK_Print,  spawn,        SHCMD("bash ~/.config/dmenu-scr/screenshot.sh") },
        	{ MODKEY,			XK_s,	togglescratch,	{.ui = 0} },
 
         { MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      rotatestack,    {.i = -1 } },
