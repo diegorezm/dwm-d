@@ -106,7 +106,6 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_b,      spawn,        SHCMD("st -e newsboat") },
 	{ MODKEY,                       XK_a,      spawn,        SHCMD("st -e vifm") },
 	{ MODKEY,                       XK_w,      spawn,        SHCMD("xdg-open http://") },
-	/* { MODKEY,                       XK_v,      spawn,        SHCMD("pavucontrol")}, */
 	{ MODKEY,                       XK_v,      spawn,        SHCMD("st -e pulsemixer")},
 
         { 0,                            XK_F11,    spawn,        SHCMD("amixer set Master 5%- && pkill -RTMIN+10 dwmblocks") },
