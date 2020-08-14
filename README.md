@@ -1,6 +1,6 @@
 #      DWM
 
-!(dwm)[dwm.png]
+![dwm](dwm.png)
 
 My fork of suckless [dwm](https://dwm.suckless.org/).
 
