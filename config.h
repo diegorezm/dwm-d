@@ -1,16 +1,14 @@
 //      APARENCIA
-
-
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 0;        /* gaps between windows */
+static const unsigned int gappx     = 3;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]            = {"JetBrainsMono NL:size=10:antialias=true:autohint=true",
-                                         "DejavuSansMono:size=10:antialias=true:autohint=true",
-                                         "FontAwesome:size=10:antialias=true:autohint=true",
-                                         "JoyPixels:size=10:antialias=true:autohint=true"};
+static const char *fonts[]            = {"JetBrainsMono NL:size=9:antialias=true:autohint=true",
+                                         "DejavuSansMono:size=9:antialias=true:autohint=true",
+                                         "FontAwesome:size=9:antialias=true:autohint=true",
+                                         "JoyPixels:size=9:antialias=true:autohint=true"};
 static const char dmenufont[]       = "monospace:size=10";
 
 static char normbgcolor[]           = "#222222";
@@ -82,7 +80,7 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
       /* SPAWN SHELL CMDS */
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define SHCMD(cmd) { .v = (const char*[]){ "/bin/bash", "-c", cmd, NULL } }
 
       /* VARIABLES */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -112,12 +110,12 @@ static Key keys[] = {
 	{ 0,                            XK_F12,    spawn,        SHCMD("amixer set Master 5%+ && pkill -RTMIN+10 dwmblocks") },
 	{ MODKEY,                       XK_F8,     spawn,        SHCMD("xbacklight -dec 10") },
 	{ MODKEY,                       XK_F9,     spawn,        SHCMD("xbacklight -inc 10") },
-	{ MODKEY,                       XK_F1,     spawn,        SHCMD("bash ~/.config/dmenu-scr/power.sh") },
-	{ MODKEY,                       XK_F2,     spawn,        SHCMD("bash ~/.config/dmenu-scr/mount.sh") },
-	{ MODKEY,                       XK_F3,     spawn,        SHCMD("bash ~/.local/bin/dmenupd") },
-	{ ControlMask|Mod1Mask,         XK_t,      spawn,        SHCMD("bash ~/.config/dmenu-scr/config.sh") },
-	{ MODKEY | ShiftMask,           XK_l,      spawn,        SHCMD("bash ~/.local/bin/screenlock") },
-	{ 0,                            XK_Print,  spawn,        SHCMD("bash ~/.config/dmenu-scr/screenshot.sh") },
+	{ MODKEY,                       XK_F1,     spawn,        SHCMD("~/.config/dmenu-scr/power.sh") },
+	{ MODKEY,                       XK_F2,     spawn,        SHCMD("~/.config/dmenu-scr/mount.sh") },
+	{ MODKEY,                       XK_F3,     spawn,        SHCMD("~/.local/bin/dmenupd") },
+	{ ControlMask|Mod1Mask,         XK_t,      spawn,        SHCMD("~/.config/dmenu-scr/config.sh") },
+	{ MODKEY | ShiftMask,           XK_l,      spawn,        SHCMD("~/.local/bin/screenlock") },
+	{ 0,                            XK_Print,  spawn,        SHCMD("~/.config/dmenu-scr/screenshot.sh") },
        	{ MODKEY,			XK_s,	togglescratch,	{.ui = 0} },
 
         { MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
@@ -135,7 +133,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
-	{ MODKEY|ShiftMask,             XK_q,      killunsel,      {0} },
+	{ MODKEY|ControlMask,             XK_q,      killunsel,      {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
