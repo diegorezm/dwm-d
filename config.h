@@ -1,4 +1,4 @@
-//      APARENCIA
+//      APPEARENCE
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int gappx     = 3;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -84,7 +84,7 @@ static const Layout layouts[] = {
 
       /* VARIABLES */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run","-h","20","-p","Run:", NULL };
+static const char *dmenucmd[] = { "dmenu_run","-h","20","-sb","#98971a","-p","Run:", NULL };
 static const char *termcmd[]  = { "st","-T","TERMINAL",NULL };
 
       /* KEYBINDS */
@@ -104,10 +104,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_b,      spawn,        SHCMD("st -e newsboat") },
 	{ MODKEY,                       XK_a,      spawn,        SHCMD("st -e vifm") },
 	{ MODKEY,                       XK_w,      spawn,        SHCMD("xdg-open http://") },
-	{ MODKEY,                       XK_v,      spawn,        SHCMD("st -e pulsemixer")},
+	{ MODKEY,                       XK_v,      spawn,        SHCMD("pavucontrol")},
 
-        { 0,                            XK_F11,    spawn,        SHCMD("amixer set Master 5%- && pkill -RTMIN+10 dwmblocks") },
-	{ 0,                            XK_F12,    spawn,        SHCMD("amixer set Master 5%+ && pkill -RTMIN+10 dwmblocks") },
+        { MODKEY,                            XK_F11,    spawn,        SHCMD("amixer set Master 5%- && pkill -RTMIN+10 dwmblocks") },
+	{ MODKEY,                            XK_F12,    spawn,        SHCMD("amixer set Master 5%+ && pkill -RTMIN+10 dwmblocks") },
 	{ MODKEY,                       XK_F8,     spawn,        SHCMD("xbacklight -dec 10") },
 	{ MODKEY,                       XK_F9,     spawn,        SHCMD("xbacklight -inc 10") },
 	{ MODKEY,                       XK_F1,     spawn,        SHCMD("~/.config/dmenu-scr/power.sh") },
