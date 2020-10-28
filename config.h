@@ -31,6 +31,7 @@ static const char *const autostart[] = {
 
 //      TAGS/WORKSPACES
 static const char *tags[] = { "1", "2", "3", "4", "5","6","7","8","9"};
+
 //     WINDOW RULES
 static const Rule rules[] = {
         /* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
@@ -56,12 +57,10 @@ static Sp scratchpads[] = {
 	{"spterm",      spcmd1},
 };
 
-
       /* LAYOUTS */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
-
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[Tile]",      tile },    /* first entry is default */
@@ -71,7 +70,6 @@ static const Layout layouts[] = {
 };
 
       /* KEYDEF */
-
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
@@ -102,7 +100,7 @@ static Key keys[] = {
 
 	/* spawn apps */
 	{ MODKEY|ShiftMask,             XK_b,      spawn,        SHCMD("st -e newsboat") },
-	{ MODKEY,                       XK_a,      spawn,        SHCMD("st -e vifm") },
+	{ MODKEY,                       XK_a,      spawn,        SHCMD("pcmanfm") },
 	{ MODKEY,                       XK_w,      spawn,        SHCMD("xdg-open http://") },
 	{ MODKEY,                       XK_v,      spawn,        SHCMD("pavucontrol")},
 
